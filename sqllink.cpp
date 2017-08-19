@@ -50,6 +50,7 @@ void query_db(MYSQL &mysql,int sex){
 			if (sex == 1) mPath.push_back(string(row[1]));
 			else wmPath.push_back(string(row[1]));
 		}
+		mysql_free_result(result_set);
 	}
 }
 void test(MYSQL& mysql,int sex)
@@ -60,6 +61,7 @@ void test(MYSQL& mysql,int sex)
 	if (sex==1) for (auto e : mPath)  cout << e << endl;
 	else for (auto e : wmPath) cout << e << endl;
 }
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	MYSQL mysql; 
@@ -72,4 +74,3 @@ int _tmain(int argc, _TCHAR* argv[])
 	mysql_close(&mysql);
 	return 0;
 }
-
