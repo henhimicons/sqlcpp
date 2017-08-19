@@ -32,7 +32,8 @@ void query_db(MYSQL &mysql,int sex){
 	       mysql : a connected database instance
 	       sex : male or female of the person we get in the camera.
 			     1 means male and 0 means female
-
+	 * at the end , the mPath and the wmPath will be filled by the corresponding ad path.
+	   mPath for the male , and wmPath for the female.
 	 */
 	string query("select * from adpath where sex = ");
 	if (sex == 1){
@@ -53,10 +54,24 @@ void query_db(MYSQL &mysql,int sex){
 		mysql_free_result(result_set);
 	}
 }
+void update_ad_data(MYSQL &mysql,string url,int count)
+{
+	/*
+	 * this function implements update count in the database
+	 * parameter meaning:
+	     mysql : a connected database instance
+		 url   : video path
+		 count : the count of play time of the url
+	 * at the end of this function , the count of the item which 
+	   has the same path with the url will be changed to count. 
+	 */
+
+
+}
 void test(MYSQL& mysql,int sex)
 {
 	/*
-	 * debug function to test the connection.
+	 * debug function to test some function whether worked properly.
 	 */
 	if (sex==1) for (auto e : mPath)  cout << e << endl;
 	else for (auto e : wmPath) cout << e << endl;
