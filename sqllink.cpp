@@ -36,34 +36,39 @@ void query_db(MYSQL &mysql,int sex){
 	 */
 	string query("select * from adpath where sex = ");
 	if (sex == 1){
-		query += " 'male' ";
+		query += " '1' ";
 	}
 	else{
-		query += " 'female' ";
+		query += " '0' ";
 	}
-	
+	MYSQL_RES *result_set;
+	int res = mysql_query(&mysql, query.c_str());
+	if (res == 0){
+		result_set = mysql_store_result(&mysql);
+		MYSQL_ROW row;
+		while (row = mysql_fetch_row(result_set)){
+			if (sex == 1) mPath.push_back(string(row[1]));
+			else wmPath.push_back(string(row[1]));
+		}
+	}
 }
-void test(MYSQL& mysql)
+void test(MYSQL& mysql,int sex)
 {
 	/*
 	 * debug function to test the connection.
 	 */
-	MYSQL_RES *result_set;
-	MYSQL_ROW row;
-	int res = mysql_query(&mysql, "select * from adpath");
-	if (res == 0){
-		result_set = mysql_store_result(&mysql);
-		while (row = mysql_fetch_row(result_set)){
-			cout << row[0] << " " << row[1] << " " << row[2] << " " << row[3] << " " << row[4] << " " << row[5] << endl;
-		}
-	}
-	mysql_free_result(result_set); 
+	if (sex==1) for (auto e : mPath)  cout << e << endl;
+	else for (auto e : wmPath) cout << e << endl;
 }
 int _tmain(int argc, _TCHAR* argv[])
 {
 	MYSQL mysql; 
 	connect_db(mysql);
-	//test(mysql);
+	query_db(mysql, 1);
+	test(mysql,1);
+	cout << 1 << endl;
+	query_db(mysql, 0);
+	test(mysql, 0);
 	mysql_close(&mysql);
 	return 0;
 }
