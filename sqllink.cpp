@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 using namespace std;
+/*you may need change the URL and the username and password due to your database situation*/
 #define URL "localhost"
 #define USERNAME "root"
 #define PASSWORD "Escort10086"
