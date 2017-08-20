@@ -158,7 +158,7 @@ void query_db(MYSQL &mysql, int sex){
 				}
 				mCount.push_back(sum);
 				num = row[0];
-                length = num.length();
+                                length = num.length();
 				sum = 0;
 				for (int i = 0; i < length; i++)
 				{
